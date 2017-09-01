@@ -3,10 +3,22 @@
     beginBtn.innerText = '开始抓取';
     beginBtn.href = 'javascript:weixin.begin()';
     beginBtn.className = 'weui_btn weui_btn_plain_primary';
+
+    let stopBtn = document.createElement('a')
+    stopBtn.innerText = '停止抓取';
+    stopBtn.href = 'javascript:weixin.stop()';
+    stopBtn.className = 'weui_btn weui_btn_plain_primary';
+    stopBtn.style.position = 'fixed';
+    stopBtn.style.top = '1em';
+    stopBtn.style.right = '1em'
+    stopBtn.style.width = '6em'
+    stopBtn.style.zIndex = '1000'
+    stopBtn.style.backgroundColor = '#FFF'
+
     document.getElementById('js_button').appendChild(beginBtn)
+    document.getElementById('js_button').appendChild(stopBtn)
     document.getElementById('js_button').style.display = "block";
     document.getElementById('js_btn_view_profile').style.display = "none";
-    //beginBtn.onclick = weixin.begin
     
     let script = document.createElement('script');
     script.innerHTML = `
@@ -15,7 +27,8 @@
     let mp_data = []
     class weixin {
         static begin() {
-            console.log('Begin catch')
+            console.log('Begin catch');
+            mp_data = [];
             weixin.hook();
             weixin.push(weixin.analtyticAll(document));
             weixin.next();
@@ -33,6 +46,7 @@
     
         static stop() {
             document.getElementById('js_history_list').insertBefore = document.getElementById('js_history_list').oldinsertBefore;
+            setTimeout(weixin.save, 1000);
         }
     
         static next() {

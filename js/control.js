@@ -3,7 +3,8 @@ let total = 0;
 let mp_data = []
 class weixin {
     static begin() {
-        console.log('Begin catch')
+        console.log('Begin catch');
+        mp_data = [];
         weixin.hook();
         weixin.push(weixin.analtyticAll(document));
         weixin.next();
@@ -21,6 +22,7 @@ class weixin {
 
     static stop() {
         document.getElementById('js_history_list').insertBefore = document.getElementById('js_history_list').oldinsertBefore;
+        setTimeout(weixin.save, 1000);
     }
 
     static next() {
