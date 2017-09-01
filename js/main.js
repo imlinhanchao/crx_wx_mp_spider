@@ -1,11 +1,16 @@
 (function main() {
     let beginBtn = document.createElement('a')
     beginBtn.innerText = '开始抓取';
+    beginBtn.id = "mp_begin";
     beginBtn.href = 'javascript:weixin.begin()';
     beginBtn.className = 'weui_btn weui_btn_plain_primary';
-
+    beginBtn.style.width = '6em'
+    beginBtn.style.zIndex = '1000'
+    beginBtn.style.backgroundColor = '#FFF'
+    
     let stopBtn = document.createElement('a')
     stopBtn.innerText = '停止抓取';
+    stopBtn.id = "mp_stop";    
     stopBtn.href = 'javascript:weixin.stop()';
     stopBtn.className = 'weui_btn weui_btn_plain_primary';
     stopBtn.style.position = 'fixed';
@@ -14,9 +19,24 @@
     stopBtn.style.width = '6em'
     stopBtn.style.zIndex = '1000'
     stopBtn.style.backgroundColor = '#FFF'
+    stopBtn.style.display = 'none'
+    
+    let downloadBtn = document.createElement('a')
+    downloadBtn.innerText = '下载数据';
+    downloadBtn.id = "mp_download";    
+    downloadBtn.href = 'javascript:weixin.save()';
+    downloadBtn.className = 'weui_btn weui_btn_plain_primary';
+    downloadBtn.style.position = 'fixed';
+    downloadBtn.style.top = '1em';
+    downloadBtn.style.left = '1em'
+    downloadBtn.style.width = '6em'
+    downloadBtn.style.zIndex = '1000'
+    downloadBtn.style.backgroundColor = '#FFF'
+    downloadBtn.style.display = 'none'
 
     document.getElementById('js_button').appendChild(beginBtn)
     document.getElementById('js_button').appendChild(stopBtn)
+    document.getElementById('js_button').appendChild(downloadBtn)
     document.getElementById('js_button').style.display = "block";
     document.getElementById('js_btn_view_profile').style.display = "none";
     
@@ -29,6 +49,8 @@
         static begin() {
             console.log('Begin catch');
             mp_data = [];
+            document.getElementById('mp_download').style.display = '';
+            document.getElementById('mp_stop').style.display = '';
             weixin.hook();
             weixin.push(weixin.analtyticAll(document));
             weixin.next();
@@ -46,7 +68,10 @@
     
         static stop() {
             document.getElementById('js_history_list').insertBefore = document.getElementById('js_history_list').oldinsertBefore;
-            setTimeout(weixin.save, 1000);
+            weixin.save();
+            document.getElementById('mp_download').style.display = 'none';
+            document.getElementById('mp_stop').style.display = 'none';
+            window.scroll(0, 0);
         }
     
         static next() {

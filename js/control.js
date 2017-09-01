@@ -5,6 +5,8 @@ class weixin {
     static begin() {
         console.log('Begin catch');
         mp_data = [];
+        document.getElementById('mp_download').style.display = '';
+        document.getElementById('mp_stop').style.display = '';
         weixin.hook();
         weixin.push(weixin.analtyticAll(document));
         weixin.next();
@@ -22,12 +24,18 @@ class weixin {
 
     static stop() {
         document.getElementById('js_history_list').insertBefore = document.getElementById('js_history_list').oldinsertBefore;
-        setTimeout(weixin.save, 1000);
+        weixin.save();
+        document.getElementById('mp_download').style.display = 'none';
+        document.getElementById('mp_stop').style.display = 'none';
+        window.scroll(0, 0);
     }
 
     static next() {
         count = 10;
         window.scroll(0, document.body.scrollHeight);
+        if (!document.getElementsByClassName('js_no_more_msg')[0].style.display) {
+            setTimeout(weixin.done, 2000);
+        }
     }
 
     static done() {
