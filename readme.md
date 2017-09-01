@@ -9,3 +9,5 @@
 4. 选择在浏览器中打开；  
 5. 点击公众号名称下方的开始抓取；
 6. 等待抓取完毕即会将数据以 `json` 文件方式下载。
+
+![https://coding.net/u/imlinhanchao/p/crx_wx_mp_spider/git/raw/master/preview.png](预览)
