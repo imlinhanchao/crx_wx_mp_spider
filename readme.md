@@ -3,7 +3,7 @@
 
 # 使用方法
 
-1. 开启 Chrome ，安装插件；  
+1. 开启 Chrome ，安装crx目录的插件；  
 2. 登录Mac版微信（Windows版需抓包到历史消息的实际地址）；  
 3. 打开公众号历史图文消息页；  
 4. 选择在浏览器中打开；  
@@ -11,3 +11,7 @@
 6. 等待抓取完毕即会将数据以 `json` 文件方式下载。
 
 ![预览](https://coding.net/u/imlinhanchao/p/crx_wx_mp_spider/git/raw/master/preview.png)
+
+# 批量下载工具
+
+内附`downloader`批量下载工具。执行`app.js --help`查看使用方法。
