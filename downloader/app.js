@@ -1,5 +1,5 @@
 #!/usr/bin/env nodejs
-const rpc = require('./rpc');
+const req = require('./req');
 const program = require('commander');
 const fs = require('fs');
 
@@ -8,18 +8,22 @@ let index = 0;
 const timeInterval = 20000;
 
 async function download() {
-	let link = data[index].link;
+    let link = data[index].link;
+    console.log(link)
 	let sn = link.match(/&sn=([^&]*?)&/)[1];
+	let biz = link.match(/biz=([^&]*?)(=|&)/)[1];
 	try {
-		rsp = await rpc.get(link);
+		rsp = await req.get(link);
 	} catch (e) {
 		console.error(e);
 		setTimeout(function() {
 			download();
 		}, timeInterval);
 		return ;
-	}
-	fs.writeFile("files/" + sn + ".html", rsp.body);
+    }
+    if(!fs.existsSync(biz))
+        fs.mkdirSync(biz)
+	fs.writeFile(`${biz}/${sn}.html`, rsp.body);
 	console.log(`index:${index}, link: ${link}, sn: ${sn}`);
 	if(++index < data.length) {
 		setTimeout(function() {

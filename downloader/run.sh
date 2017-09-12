@@ -1,1 +1,1 @@
- (nohup ./app.js &)
+ npm install && (nohup ./app.js &)
