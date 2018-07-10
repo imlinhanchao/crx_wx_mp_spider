@@ -34,10 +34,11 @@
     downloadBtn.style.backgroundColor = '#FFF'
     downloadBtn.style.display = 'none'
 
-    document.getElementById('js_button').appendChild(beginBtn)
-    document.getElementById('js_button').appendChild(stopBtn)
-    document.getElementById('js_button').appendChild(downloadBtn)
-    document.getElementById('js_button').style.display = "block";
+    var buttonClass = 'js_operator'
+    document.getElementById(buttonClass).appendChild(beginBtn)
+    document.getElementById(buttonClass).appendChild(stopBtn)
+    document.getElementById(buttonClass).appendChild(downloadBtn)
+    document.getElementById(buttonClass).style.display = "block";
     document.getElementById('js_btn_view_profile').style.display = "none";
     
     let script = document.createElement('script');
